@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% load jalali %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">مدیریت اطلاعات</span><h1>تأیید حذف</h1></div></div>
+<section class="card form-card"><h2>«{{ object }}» حذف شود؟</h2><p class="warning-text">این کار قابل بازگشت نیست.</p>
+{% if kind == 'subject' %}<div class="notice danger">همراه این درس، {{ related.resources|fa }} منبع، {{ related.study|fa }} جلسه مطالعه و {{ related.practice|fa }} جلسه تست‌زنی هم حذف می‌شوند.</div><p>برای حفظ سوابق، می‌توانید درس را از طریق ویرایش بایگانی کنید.</p><a class="text-link" href="{% url 'subject_edit' object.pk %}">ویرایش و بایگانی درس</a>{% elif kind == 'resource' %}<div class="notice danger">تمام {{ related.study|fa }} جلسهٔ مطالعهٔ این منبع هم حذف می‌شوند و پیشرفت درس تغییر می‌کند.</div>{% endif %}
+<form method="post">{% csrf_token %}<div class="form-actions"><button class="button danger-button" type="submit">حذف دائمی</button><a class="button secondary" href="{{ cancel_url }}">انصراف</a></div></form></section>
+{% endblock %}

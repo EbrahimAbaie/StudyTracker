@@ -1,0 +1,11 @@
+{% load jalali %}
+<article class="card subject-card">
+  <div class="card-heading"><div><span class="eyebrow">درس {% if not row.subject.is_active %}· بایگانی‌شده{% endif %}</span><h3><a href="{% url 'subject_detail' row.subject.pk %}">{{ row.subject.name }}</a></h3></div><span class="badge">{{ row.progress|percent }}</span></div>
+  {% include 'partials/progress.html' with label='پیشرفت کل' value=row.progress %}
+  <dl class="key-values compact">
+    <div><dt>منابع · زمان واقعی / برآورد</dt><dd>{{ row.actual_study|duration }} / {{ row.planned_study|duration }}</dd></div>
+    <div><dt>تست‌زنی</dt><dd>{{ row.actual_practice|duration }}{% if row.has_practice_target %} / {{ row.planned_practice|duration }}{% else %}<small>هدف زمانی تعیین نشده</small>{% endif %}</dd></div>
+    <div><dt>کار باقی‌مانده</dt><dd class="blue">{{ row.remaining|duration }}</dd></div>
+  </dl>
+  <div class="card-bottom"><span>{{ row.stats.total|fa }} تست <small>· دقت {{ row.stats.accuracy|percent }}</small></span><a class="text-link" href="{% url 'subject_detail' row.subject.pk %}">مشاهده جزئیات <span aria-hidden="true">←</span></a></div>
+</article>

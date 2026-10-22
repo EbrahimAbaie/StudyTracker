@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      DEBUG: "False"
+      SECRET_KEY: "${SECRET_KEY:-}"
+      TIME_ZONE: "${TIME_ZONE:-Asia/Tehran}"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; r=urllib.request.urlopen('http://127.0.0.1:8000/health/', timeout=5); assert r.status == 200 and r.read() == b'OK'"]
+      interval: 30s
+      timeout: 6s
+      start_period: 30s
+      retries: 3

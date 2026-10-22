@@ -1,0 +1,14 @@
+{% load jalali %}
+<div class="forecast-box">
+  <span class="eyebrow">پیش‌بینی پایان</span>
+  <p>{{ forecast.label }}</p>
+  {% if forecast.weeks_to_finish != None %}
+    <dl class="key-values">
+      <div><dt>میانگین فعالیت اخیر</dt><dd>{{ forecast.weekly_average|duration }} در هفته</dd></div>
+      <div><dt>زمان تقریبی تا پایان</dt><dd>{{ forecast.weeks_to_finish|floatformat:1|fa }} هفته</dd></div>
+      <div><dt>پایان تخمینی</dt><dd>{{ forecast.completion_date|jalali_date:"long" }}</dd></div>
+      <div><dt>بازهٔ مشاهده</dt><dd>{{ forecast.observed_days|fa }} روز · {{ forecast.session_count|fa }} جلسه</dd></div>
+    </dl>
+  {% endif %}
+  {% if forecast.after_exam %}<p class="warning-text">با سرعت فعلی، پایان تخمینی این درس بعد از تاریخ کنکور قرار می‌گیرد.</p>{% endif %}
+</div>

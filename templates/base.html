@@ -1,0 +1,39 @@
+{% load static jalali %}
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>{% block title %}مسیر | پیگیری مطالعه{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script defer src="{% static 'js/app.js' %}"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">رفتن به محتوا</a>
+<aside class="sidebar">
+  <a class="brand" href="{% url 'dashboard' %}"><span class="brand-mark" aria-hidden="true">م</span><span>مسیر<small>دفتر مطالعهٔ شخصی</small></span></a>
+  <span class="nav-label">فضای مطالعه</span>
+  {% with route=request.resolver_match.url_name %}
+  <nav aria-label="منوی اصلی">
+    <a href="{% url 'dashboard' %}" {% if route == 'dashboard' %}aria-current="page"{% endif %}><span aria-hidden="true">◫</span> داشبورد</a>
+    <a href="{% url 'subject_list' %}" {% if route == 'subject_list' or route == 'subject_detail' or route == 'subject_edit' or route == 'subject_add' %}aria-current="page"{% endif %}><span aria-hidden="true">▤</span> درس‌ها</a>
+    <a href="{% url 'study_add' %}" {% if route == 'study_add' %}aria-current="page"{% endif %}><span aria-hidden="true">＋</span> ثبت مطالعه</a>
+    <a href="{% url 'practice_add' %}" {% if route == 'practice_add' %}aria-current="page"{% endif %}><span aria-hidden="true">◎</span> ثبت تست</a>
+    <a href="{% url 'history' %}" {% if route == 'history' %}aria-current="page"{% endif %}><span aria-hidden="true">◷</span> سوابق</a>
+    <a href="{% url 'settings' %}" {% if route == 'settings' %}aria-current="page"{% endif %}><span aria-hidden="true">⚙</span> تنظیمات</a>
+  </nav>
+  {% endwith %}
+  <div class="sidebar-footer"><span class="status-dot"></span> محلی و آفلاین<small>اطلاعات شما روی همین دستگاه است.</small></div>
+</aside>
+<div class="workspace">
+  <header class="topbar"><span>پیگیری پیشرفت مطالعه</span><time>{{ today|jalali_date:"full" }}</time></header>
+  <main id="main" tabindex="-1">
+    {% for message in messages %}<div class="notice success" role="status">{{ message }}</div>{% endfor %}
+    {% block content %}{% endblock %}
+    <footer class="page-footer">ثبت واقعیت، مشاهدهٔ پیشرفت، تخمین بر اساس عملکرد</footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }} | مسیر{% endblock %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">دفتر مطالعه</span><h1>{{ title }}</h1><p>{% block description %}اطلاعات را وارد کنید؛ تغییرات بلافاصله در محاسبات اعمال می‌شوند.{% endblock %}</p></div></div>
+<section class="card form-card"><form method="post" novalidate>{% csrf_token %}{% include 'partials/form_fields.html' %}{% block form_extra %}{% endblock %}<div class="form-actions"><button class="button" type="submit">ذخیره</button><a class="button secondary" href="{{ cancel_url }}">انصراف</a></div></form></section>
+{% block after_form %}{% endblock %}
+{% endblock %}

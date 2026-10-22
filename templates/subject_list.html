@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-heading"><div><span class="eyebrow">منابع و حجم کار</span><h1>درس‌ها</h1><p>درس‌های فعال و بایگانی‌شده</p></div><a class="button" href="{% url 'subject_add' %}">＋ افزودن درس</a></div>
+<div class="subject-grid">{% for row in subjects %}{% include 'partials/subject_card.html' %}{% empty %}<section class="card empty-state"><h2>اولین درس را اضافه کن</h2><p>با تعریف یک درس و منابع آن شروع کنید.</p><a class="button" href="{% url 'subject_add' %}">افزودن درس</a></section>{% endfor %}</div>
+{% endblock %}

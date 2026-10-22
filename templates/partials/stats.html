@@ -1,0 +1,8 @@
+{% load jalali %}
+<div class="test-stats">
+  <div><strong>{{ stats.total|fa }}</strong><small>مجموع تست</small></div>
+  <div class="positive"><strong>{{ stats.correct|fa }}</strong><small>صحیح</small></div>
+  <div class="negative"><strong>{{ stats.wrong|fa }}</strong><small>غلط</small></div>
+  <div><strong>{{ stats.unanswered|fa }}</strong><small>نزده</small></div>
+</div>
+<div class="stat-line"><span>دقت پاسخ‌ها</span><strong>{{ stats.accuracy|percent }}</strong><span>نرخ پاسخ‌گویی</span><strong>{{ stats.answer_rate|percent }}</strong></div>

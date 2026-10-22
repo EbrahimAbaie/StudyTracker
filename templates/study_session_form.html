@@ -1,0 +1,4 @@
+{% extends 'form.html' %}
+{% block description %}زمان مطالعهٔ واقعی را برای یک منبع ثبت کنید؛ دیدن ویدیوی نکته و تست هم مطالعه محسوب می‌شود.{% endblock %}
+{% block form_extra %}{{ resource_options|json_script:'resource-options' }}{% endblock %}
+{% block after_form %}<p class="hint">برای مطالعهٔ خارج از منابع اصلی، ابتدا یک منبع مانند «مرور شخصی» با برآورد زمانی مشخص بسازید. <a class="text-link" href="{% url 'subject_list' %}">مدیریت درس‌ها و منابع</a></p>{% endblock %}
